@@ -15,7 +15,7 @@ interface ELI5SchemeCardProps {
     logId?: string;
 }
 
-const PHONE_REGEX = /^\+[1-9]\d{6,14}$/;
+const PHONE_REGEX = /^\+91\d{10}$/; // Must be an Indian number (+91XXXXXXXXXX)
 
 export const ELI5SchemeCard: React.FC<ELI5SchemeCardProps> = ({
     title,

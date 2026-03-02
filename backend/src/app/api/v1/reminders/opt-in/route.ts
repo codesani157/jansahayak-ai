@@ -45,8 +45,14 @@ export async function POST(request: NextRequest) {
     const reminderId = uuidv4();
 
     if (db) {
-      // Update user's phone number if not set
+      // Verify user exists before updating
       const userRef = db.collection('Users').doc(user.userId);
+      const userDoc = await userRef.get();
+      if (!userDoc.exists) {
+        return errorResponse('User not found', 404);
+      }
+
+      // Update user's phone number if not set
       await userRef.update({
         phone_number,
         updated_at: new Date().toISOString(),

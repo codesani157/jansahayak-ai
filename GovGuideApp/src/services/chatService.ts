@@ -25,7 +25,7 @@ export async function sendQuery(
   return apiFetch<ChatResponse>({
     method: 'POST',
     path: '/chat/query',
-    body: { text_query: text, audio_blob: null },
+    body: { text_query: text },
     signal,
   });
 }

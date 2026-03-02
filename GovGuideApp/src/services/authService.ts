@@ -8,6 +8,7 @@ interface SessionResponse {
 }
 
 const TOKEN_KEY = 'govguide_jwt';
+const DEVICE_ID_KEY = 'govguide_device_id';
 
 // ── Platform-safe persistence ──────────────────────────────────
 // expo-secure-store is loaded lazily so the app still compiles
@@ -51,15 +52,50 @@ export async function loadPersistedToken(): Promise<boolean> {
   return false;
 }
 
+// ── Stable device fingerprint ──────────────────────────────────
+// Generates a random UUID on first launch and persists it so the
+// backend can map this device to the same user across sessions.
+
+function generateUUID(): string {
+  // Simple UUID v4 without external dependencies
+  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, (c) => {
+    const r = (Math.random() * 16) | 0;
+    const v = c === 'x' ? r : (r & 0x3) | 0x8;
+    return v.toString(16);
+  });
+}
+
+async function getOrCreateDeviceId(): Promise<string> {
+  if (Platform.OS === 'web') {
+    let deviceId = localStorage.getItem(DEVICE_ID_KEY);
+    if (!deviceId) {
+      deviceId = generateUUID();
+      localStorage.setItem(DEVICE_ID_KEY, deviceId);
+    }
+    return deviceId;
+  }
+  if (SecureStore) {
+    let deviceId = await SecureStore.getItemAsync(DEVICE_ID_KEY);
+    if (!deviceId) {
+      deviceId = generateUUID();
+      await SecureStore.setItemAsync(DEVICE_ID_KEY, deviceId);
+    }
+    return deviceId;
+  }
+  return generateUUID();
+}
+
 /**
  * Create an anonymous session (or resume if backend recognises
  * the device). Called once on app mount.
  */
 export async function initSession(): Promise<string> {
+  const deviceId = await getOrCreateDeviceId();
   const res = await apiFetch<SessionResponse>({
     method: 'POST',
     path: '/auth/session',
     body: {},
+    deviceId,
   });
   await persistToken(res.token);
   return res.user_id;

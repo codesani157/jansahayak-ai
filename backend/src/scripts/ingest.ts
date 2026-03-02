@@ -8,7 +8,7 @@
  *   npm run ingest
  *
  * This script reads government scheme data from src/data/schemes.json,
- * generates embeddings using Gemini text-embedding-004, and upserts them
+ * generates embeddings using Gemini gemini-embedding-001 (768 dim), and upserts them
  * into the Pinecone "govguide-schemes" index.
  */
 

@@ -46,6 +46,7 @@ interface RequestOptions {
   signal?: AbortSignal;
   multipart?: FormData; // for audio blobs
   timeout?: number; // ms, defaults to REQUEST_TIMEOUT_MS
+  deviceId?: string; // sent via X-Device-Id header for session creation
 }
 
 export async function apiFetch<T>(opts: RequestOptions): Promise<T> {
@@ -53,6 +54,10 @@ export async function apiFetch<T>(opts: RequestOptions): Promise<T> {
 
   if (_accessToken) {
     headers['Authorization'] = `Bearer ${_accessToken}`;
+  }
+
+  if (opts.deviceId) {
+    headers['X-Device-Id'] = opts.deviceId;
   }
 
   if (!opts.multipart) {

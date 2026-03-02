@@ -15,7 +15,7 @@ import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../navigation/types';
 import { useChatMessages } from '../hooks';
 import type { Message } from '../hooks';
-import { DEFAULT_QUICK_REPLIES } from '../constants';
+import { getQuickReplies } from '../constants';
 import { useAppContext } from '../context';
 
 type Props = NativeStackScreenProps<RootStackParamList, 'Chat'>;
@@ -34,7 +34,7 @@ const TypingIndicator = () => (
     </View>
 );
 
-export const ChatScreen: React.FC<Props> = ({ route, navigation }) => {
+export const ChatScreen: React.FC<Props> = ({ navigation }) => {
     const { persona } = useAppContext();
     const personaIcon = persona?.icon ?? '🚜';
     const {
@@ -118,7 +118,7 @@ export const ChatScreen: React.FC<Props> = ({ route, navigation }) => {
                 <View style={styles.chipsOuter}>
                     <ResponsiveContainer maxWidth={theme.layout.maxContentWidth} fullHeight={false}>
                         <QuickReplyList
-                            topics={DEFAULT_QUICK_REPLIES}
+                            topics={getQuickReplies(persona?.id)}
                             onSelect={sendMessage}
                         />
                     </ResponsiveContainer>

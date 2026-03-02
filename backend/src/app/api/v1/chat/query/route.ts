@@ -50,7 +50,7 @@ export async function POST(request: NextRequest) {
 
     // Step 2: Search Pinecone for relevant schemes
     const index = getIndex();
-    let contextChunks: string[] = [];
+    const contextChunks: string[] = [];
     interface SchemeCard {
       scheme_id: string;
       title: string;
