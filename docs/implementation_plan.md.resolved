@@ -1,0 +1,67 @@
+# GovGuide: Step-by-Step Implementation Roadmap
+
+## 1. Overview & Architecture Strategy
+This document outlines the sequenced execution plan for GovGuide, a lightweight, mobile-first web app with a RAG backend. It incorporates data from Indian government sources and utilizes a 100% free-tier architecture, including Telegram as a scalable file storage solution, Firebase for relational data, Pinecone/Qdrant for vector search, and Gemini/Groq for LLM capabilities.
+
+## 2. Resource Pool Strategy for Government Data 
+### Indian Government Data Sources
+*   **API Setu & MyScheme API:** The primary open API platform (apisetu.gov.in) operated by the Ministry of Electronics and IT (MeitY). MyScheme API serves as a centralized national scheme discovery platform.
+*   **Open Government Data (OGD) Platform India (data.gov.in):** A massive hub providing extensive datasets, public APIs, and scheme manuals across all government ministries.
+
+### Binding Strategy
+*   **Offline Data Ingestion Pipeline:** Instead of querying government APIs directly in real-time (which are prone to rate limits or latency), we will build an offline ingestion pipeline (e.g., using Celery/Redis crons or Airflow).
+*   **Data Extraction & Structuring:** Programmatically fetch scheme data from MyScheme and OGD APIs periodically, sanitize the HTML/PDFs, and convert it into clean Markdown/JSON text chunks.
+*   **Enrichment & Storage:** Run these chunks through a free embedding model and store vectors in a dedicated free-tier Vector DB (like Pinecone or Qdrant Cloud), while offloading any heavy scheme PDF manuals to Telegram. Metadata and user accounts will be managed via Firebase Firestore (Spark Plan).
+
+## 3. Telegram as a Mass Database: Engineering Implementation Summary
+Based on engineering limits and discussions surrounding building an "unlimited cloud storage database" on top of Telegram:
+
+### The Hybrid Architecture Process
+*   **Telegram as Object Storage (BLOB):** Telegram handles the heavy lifting of storing actual physical documents files (up to 2GB per file for standard bots). The system uploads files to a private, dedicated channel and retrieves a `file_id`.
+*   **External Database (Firebase & Pinecone) for Metadata:** Telegram is *not* a structured database and lacks arbitrary querying options. A relational proxy must exist. We will store User schemas and simple metadata in Firebase Firestore. For semantic search, vector embeddings (mapped to `telegram_file_id`) will reside in a specialized Vector DB like Pinecone (Free Starter Plan) or Qdrant Cloud.
+
+### Key Implementation Considerations
+*   **Rate Limiting & Chunking:** Telegram imposes strict API rate limits (e.g. 20 msgs/min per group). Bulk ingestion must utilize throttling queues. Files exceeding limits must be chunked programmably.
+*   **Bypassing Real-Time Latency:** To avoid slow response times for end-users, we *never* download files from Telegram during a live chat. User queries strictly hit the Vector DB (matching text chunks) and the LLM. Telegram acts as a cold-storage vault for retrieving the raw PDF *only* if the user clicks "Download Original Document".
+*   **Data Isolation:** The bot acts as an interface to a private, secured channel. Regular backups of the Firebase/Pinecone metadata are paramount since losing the DB means losing the mapping to millions of Telegram `file_id`s.
+
+## 4. Implementation Step-by-Step Execution Sequence
+
+### Phase 1: Foundation & Dependency Order
+1.  **Environment Setup:** Initialize the React Native Expo project for web output.
+2.  **Backend Boilerplate:** Initialize Next.js (Pages or App Router) for unified frontend and serverless API endpoints hosted on Vercel.
+3.  **Authentication Engine Setup:** Implement frictionless device fingerprinting auth, stepping up to Firebase Authentication (OTP/Phone) for users opting into SMS reminders.
+4.  **Telegram Bot Integration Setup:** Register bot on BotFather, secure tokens, and configure the storage channel.
+
+### Phase 2: Data Pipeline & Storage Wiring Order
+1.  **Schema Creation:** Configure Firebase Firestore collections for `Users`, `Roles`, `Reminders`, and `ChatLogs`. Set up the Pinecone/Qdrant index for `Schemes (Vector Data)`.
+2.  **Resource Ingestion Script:** Build the data fetchers hitting `data.gov.in` and `apisetu.gov.in`.
+3.  **Telegram Upload Engine:** Wire extraction outputs to push heavy PDFs to Telegram, receive the `file_id`, and chunk the textual content recursively.
+4.  **Embedding Pipeline:** Pass the text chunks through a fast/free embedding model and insert `(embedding, scheme_metadata, telegram_file_id)` into Pinecone/Qdrant.
+
+### Phase 3: Core API & RAG Backend
+1.  **Search Endpoint (`/api/v1/chat/query`):** Implement semantic search taking a user string, embedding it, and performing a search in Pinecone/Qdrant, pre-filtered by the User's Role ID (metadata filtering).
+2.  **LLM Generation Logic:** Construct the "Explain Like I'm 5" dynamic prompt using retrieved vector context. Connect to a free-tier capable LLM (Google Gemini Free Tier or Groq API for speed).
+3.  **Voice Processing:** Add a route to accept audio blobs, utilizing Bhashini or Whisper for STT translation prior to vector search.
+
+### Phase 4: Frontend Development & State Management Plan
+*   **State Management Tool:** `Zustand` for global state (User Persona, App Language) coupled with `React Query (@tanstack/react-query)` for async chat data fetching and caching.
+*   **Data Flow Mapping:**
+    *   **User -> UI:** User selects their persona + language (Saved in AsyncStorage + Zustand).
+    *   **UI -> Backend:** Submits text/audio via React Query mutation to `/api/v1/chat/query`, passing UserID and Persona context.
+    *   **Backend -> UI:** Returns the synthesized ELI5 response and the source links.
+    *   **UI -> Local UI:** Chat array is updated immediately (optimistic update), and finalized when the promise resolves.
+
+### Phase 5: Smart Reminders (Asynchronous Workers)
+1.  **Queue System:** Set up a worker queue (Upstash QStash or Redis).
+2.  **Cron Job Scheduler:** Build a chron task (or Vercel Cron Jobs) to query Firebase daily for deadlines occurring within 3 days.
+3.  **SMS Gateway:** Integrate Twilio or AWS SNS. Dispatch payload to matching users and update `Reminders` status to `SENT`.
+
+## 5. Risk Areas & Mitigation Strategies
+*   **Telegram Rate Limiting & Account Bans:** High risk during mass scheme ingestion. *Mitigation:* Implement strict exponential backoff, circuit breaking, and spread ingestion over days. Use official Bot APIs properly.
+*   **LLM Hallucinations:** High risk of providing incorrect legal/scheme details. *Mitigation:* Enforce deep RAG bounding instructions ("Answer solely using the context provided") and append permanent disclaimers to UI replies.
+*   **Database Cost Spikes:** High-dimensional vector searches become expensive. *Mitigation:* Implement semantic caching with Redis to intercept repetitive user queries about popular schemes.
+*   **Voice/Dialect Errors:** High misinterpretation risk with regional accents. *Mitigation:* Heavily test Bhashini endpoints. Offer fallback mechanisms giving users the option to manually edit transcribed text before committing the search.
+
+## User Review Required
+Please review this implementation roadmap. Once approved, we will transition into the Execution phase and begin building Phase 1.

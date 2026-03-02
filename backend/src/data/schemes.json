@@ -1,0 +1,152 @@
+[
+  {
+    "id": "pm_kisan",
+    "title": "PM-KISAN (Pradhan Mantri Kisan Samman Nidhi)",
+    "summary": "Direct income support of ₹6,000 per year to small and marginal farmer families across India. The amount is paid in three equal instalments of ₹2,000 every four months directly into the bank account.",
+    "eligibility": "All farmer families with cultivable landholding (subject to exclusions like institutional landholders, income tax payers, government employees). Both husband and wife cannot claim separately.",
+    "benefit_amount": "₹6,000 per year (₹2,000 every 4 months)",
+    "apply_url": "https://pmkisan.gov.in",
+    "department": "Ministry of Agriculture & Farmers Welfare",
+    "category": "agriculture"
+  },
+  {
+    "id": "pmfby",
+    "title": "PMFBY (Pradhan Mantri Fasal Bima Yojana)",
+    "summary": "Crop insurance scheme providing financial support to farmers suffering crop loss due to natural calamities, pests, and diseases. Farmers pay minimal premium: 2% for Kharif, 1.5% for Rabi, and 5% for commercial/horticultural crops.",
+    "eligibility": "All farmers growing notified crops in notified areas. Both loanee and non-loanee farmers can enrol. Sharecroppers and tenant farmers are also eligible with proper documentation.",
+    "benefit_amount": "Full insured sum based on crop and area (varies by state and season)",
+    "apply_url": "https://pmfby.gov.in",
+    "department": "Ministry of Agriculture & Farmers Welfare",
+    "category": "agriculture"
+  },
+  {
+    "id": "pm_mudra",
+    "title": "PM MUDRA Yojana (Micro Units Development & Refinance Agency)",
+    "summary": "Provides loans up to ₹10 lakh to non-corporate, non-farm small/micro enterprises. Three categories: Shishu (up to ₹50,000), Kishore (₹50,001 to ₹5 lakh), Tarun (₹5 lakh to ₹10 lakh). No collateral required.",
+    "eligibility": "Any Indian citizen with a business plan for a non-farm income-generating activity. Manufacturing, trading, services, and allied agriculture activities qualify. No collateral needed.",
+    "benefit_amount": "Loans from ₹50,000 to ₹10,00,000 (collateral-free)",
+    "apply_url": "https://www.mudra.org.in",
+    "department": "Ministry of Finance",
+    "category": "business"
+  },
+  {
+    "id": "pmay_urban",
+    "title": "PMAY-Urban (Pradhan Mantri Awas Yojana - Urban)",
+    "summary": "Affordable housing scheme for urban poor. Provides interest subsidy on home loans for EWS/LIG/MIG categories. Aims to provide pucca houses with basic amenities to all eligible urban households by 2024.",
+    "eligibility": "EWS (annual income up to ₹3 lakh), LIG (₹3-6 lakh), MIG-I (₹6-12 lakh), MIG-II (₹12-18 lakh). Beneficiary family should not own a pucca house anywhere in India.",
+    "benefit_amount": "Interest subsidy: 6.5% for EWS/LIG, 4% for MIG-I, 3% for MIG-II on home loans",
+    "apply_url": "https://pmaymis.gov.in",
+    "department": "Ministry of Housing & Urban Affairs",
+    "category": "housing"
+  },
+  {
+    "id": "pmay_gramin",
+    "title": "PMAY-Gramin (Pradhan Mantri Awas Yojana - Gramin)",
+    "summary": "Rural housing scheme providing financial assistance to build pucca houses for houseless and those living in kutcha/dilapidated houses. Assistance of ₹1.20 lakh in plains and ₹1.30 lakh in hilly/difficult areas.",
+    "eligibility": "BPL families, SC/ST households, freed bonded labourers, minorities, and families with no house or living in zero/one room kutcha houses. Selection based on SECC 2011 data.",
+    "benefit_amount": "₹1,20,000 (plains) / ₹1,30,000 (hilly areas) + 90/95 days of MGNREGA wages",
+    "apply_url": "https://pmayg.nic.in",
+    "department": "Ministry of Rural Development",
+    "category": "housing"
+  },
+  {
+    "id": "ayushman_bharat",
+    "title": "Ayushman Bharat - Pradhan Mantri Jan Arogya Yojana (PM-JAY)",
+    "summary": "World's largest health insurance scheme providing ₹5 lakh per family per year for secondary and tertiary care hospitalisation. Covers pre and post hospitalisation expenses. Cashless and paperless at empanelled hospitals.",
+    "eligibility": "Bottom 40% vulnerable families as per SECC 2011 database — approximately 10.74 crore families (50 crore individuals). No cap on family size or age. Pre-existing diseases covered from day one.",
+    "benefit_amount": "₹5,00,000 per family per year (cashless hospitalisation)",
+    "apply_url": "https://pmjay.gov.in",
+    "department": "Ministry of Health & Family Welfare",
+    "category": "health"
+  },
+  {
+    "id": "sukanya_samriddhi",
+    "title": "Sukanya Samriddhi Yojana",
+    "summary": "Small savings scheme for the girl child under the 'Beti Bachao Beti Padhao' campaign. High interest rate (currently ~8%), tax-free returns. Account matures when girl turns 21. Partial withdrawal allowed after 18 for education/marriage.",
+    "eligibility": "Parents/guardians of a girl child below 10 years of age. Maximum 2 accounts per family (one per girl child). Minimum deposit ₹250/year, maximum ₹1,50,000/year.",
+    "benefit_amount": "~8% annual interest (tax-free under 80C). Maturity at age 21.",
+    "apply_url": "https://www.india.gov.in/sukanya-samriddhi-yojna",
+    "department": "Ministry of Finance",
+    "category": "education"
+  },
+  {
+    "id": "pm_scholarship",
+    "title": "Prime Minister's Scholarship Scheme (PMSS)",
+    "summary": "Scholarships for wards of ex-servicemen and ex-Coast Guard personnel for professional/technical education. ₹3,000/month for boys, ₹3,000/month for girls for professional degree courses.",
+    "eligibility": "Wards/widows of ex-servicemen and ex-Coast Guard personnel. Students must be pursuing first professional degree in engineering, medical, dental, veterinary, BBA, BCA, B.Pharma, etc. Minimum 60% marks in qualifying exam.",
+    "benefit_amount": "₹3,000/month (boys), ₹3,000/month (girls) for up to 5 years",
+    "apply_url": "https://scholarships.gov.in",
+    "department": "Ministry of Defence",
+    "category": "education"
+  },
+  {
+    "id": "mgnrega",
+    "title": "MGNREGA (Mahatma Gandhi National Rural Employment Guarantee Act)",
+    "summary": "Guarantees 100 days of wage employment per year to every rural household whose adult members volunteer to do unskilled manual work. Minimum wages as per state notification. Work must be provided within 15 days of application.",
+    "eligibility": "Any adult member of a rural household willing to do unskilled manual work. Must apply to the local Gram Panchayat. Job card issued within 15 days of application.",
+    "benefit_amount": "100 days guaranteed employment at state minimum wage (₹200-350/day depending on state)",
+    "apply_url": "https://nrega.nic.in",
+    "department": "Ministry of Rural Development",
+    "category": "employment"
+  },
+  {
+    "id": "pm_svanidhi",
+    "title": "PM SVANidhi (PM Street Vendor's AtmaNirbhar Nidhi)",
+    "summary": "Micro-credit scheme for street vendors affected by COVID-19. Provides working capital loan of up to ₹10,000 (first tranche), ₹20,000 (second), ₹50,000 (third). Interest subsidy of 7% per annum.",
+    "eligibility": "Street vendors with Certificate of Vending / Letter of Recommendation from ULB. Vendors who were operational on or before 24 March 2020. Vendors from surrounding peri-urban/rural areas also eligible.",
+    "benefit_amount": "Working capital loans: ₹10,000 → ₹20,000 → ₹50,000 with 7% interest subsidy",
+    "apply_url": "https://pmsvanidhi.mohua.gov.in",
+    "department": "Ministry of Housing & Urban Affairs",
+    "category": "business"
+  },
+  {
+    "id": "ujjwala",
+    "title": "Pradhan Mantri Ujjwala Yojana (PMUY)",
+    "summary": "Free LPG connections to women from BPL households. Aims to eliminate unclean cooking fuels. Each beneficiary gets a deposit-free LPG connection with a first refill and hotplate free of cost.",
+    "eligibility": "Women beneficiaries from BPL households not having an LPG connection. The woman must be 18+ years. Priority to SC/ST, PMAY beneficiaries, most backward districts, forest dwellers.",
+    "benefit_amount": "Free LPG connection + first refill + hotplate (total value ~₹1,600)",
+    "apply_url": "https://www.pmuy.gov.in",
+    "department": "Ministry of Petroleum & Natural Gas",
+    "category": "welfare"
+  },
+  {
+    "id": "nsap_old_age",
+    "title": "NSAP - Indira Gandhi National Old Age Pension Scheme (IGNOAPS)",
+    "summary": "Monthly pension for destitute elderly persons. Central contribution: ₹200/month for 60-79 years, ₹500/month for 80+ years. States may add additional amount. Total pension varies by state.",
+    "eligibility": "Indian citizen aged 60 years and above belonging to below poverty line (BPL) household as per state list. Must not be receiving pension from any other scheme.",
+    "benefit_amount": "₹200/month (60-79 years), ₹500/month (80+ years) — states may add more",
+    "apply_url": "https://nsap.nic.in",
+    "department": "Ministry of Rural Development",
+    "category": "welfare"
+  },
+  {
+    "id": "stand_up_india",
+    "title": "Stand-Up India Scheme",
+    "summary": "Bank loans between ₹10 lakh and ₹1 crore for setting up greenfield enterprises in manufacturing, services, or trading. At least one SC/ST and one woman borrower per bank branch.",
+    "eligibility": "SC/ST and/or Women entrepreneurs above 18 years. The enterprise should be a greenfield (new) venture. Borrowers should not be in default to any bank/financial institution.",
+    "benefit_amount": "Composite loan from ₹10 lakh to ₹1 crore (includes term loan + working capital)",
+    "apply_url": "https://www.standupmitra.in",
+    "department": "Ministry of Finance",
+    "category": "business"
+  },
+  {
+    "id": "pm_kaushal",
+    "title": "Pradhan Mantri Kaushal Vikas Yojana (PMKVY)",
+    "summary": "Skill development scheme offering free short-term training (150-300 hours) and certification. Training provided through certified training centres. Monetary reward on successful assessment and certification.",
+    "eligibility": "Indian nationals who are school/college dropouts or unemployed. Youth with prior learning experience can get RPL (Recognition of Prior Learning) certification. No age bar for RPL, 15-45 for fresh training.",
+    "benefit_amount": "Free training + ₹8,000 reward on certification (approximate, varies by trade)",
+    "apply_url": "https://www.pmkvyofficial.org",
+    "department": "Ministry of Skill Development & Entrepreneurship",
+    "category": "employment"
+  },
+  {
+    "id": "pm_jandhan",
+    "title": "Pradhan Mantri Jan Dhan Yojana (PMJDY)",
+    "summary": "Financial inclusion scheme providing zero-balance bank accounts with RuPay debit card and ₹2 lakh accident insurance coverage. Overdraft facility of ₹10,000 for eligible accounts. ₹1 lakh life cover for accounts opened before Jan 2015.",
+    "eligibility": "Any Indian citizen aged 10 years and above who does not have a bank account. Minor (10-18) can open account with guardian. No minimum balance required.",
+    "benefit_amount": "Zero-balance account + RuPay card + ₹2 lakh accident insurance + ₹10,000 overdraft",
+    "apply_url": "https://pmjdy.gov.in",
+    "department": "Ministry of Finance",
+    "category": "financial_inclusion"
+  }
+]
