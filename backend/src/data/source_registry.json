@@ -1,0 +1,538 @@
+[
+  {
+    "id": "central_myscheme",
+    "name": "MyScheme (Central)",
+    "source_url": "https://www.myscheme.gov.in/sitemap-0.xml",
+    "source_type": "portal",
+    "parser_strategy": "xml_sitemap",
+    "trust_level": 100,
+    "source_state": "central",
+    "department_hint": "Government of India",
+    "category_hint": "general",
+    "allowed_apply_domains": [
+      "gov.in",
+      "nic.in"
+    ],
+    "enabled": true
+  },
+  {
+    "id": "central_india_gov",
+    "name": "India.gov.in",
+    "source_url": "https://www.india.gov.in/sitemap.xml",
+    "source_type": "portal",
+    "parser_strategy": "xml_sitemap",
+    "trust_level": 100,
+    "source_state": "central",
+    "department_hint": "Government of India",
+    "category_hint": "general",
+    "allowed_apply_domains": [
+      "gov.in",
+      "nic.in"
+    ],
+    "enabled": true
+  },
+  {
+    "id": "state_andhra_pradesh",
+    "name": "Andhra Pradesh Government",
+    "source_url": "https://www.ap.gov.in",
+    "source_type": "portal",
+    "parser_strategy": "html_catalog",
+    "trust_level": 96,
+    "source_state": "andhra_pradesh",
+    "allowed_apply_domains": [
+      "gov.in",
+      "nic.in"
+    ],
+    "enabled": false
+  },
+  {
+    "id": "state_arunachal_pradesh",
+    "name": "Arunachal Pradesh Government",
+    "source_url": "https://arunachalpradesh.gov.in",
+    "source_type": "portal",
+    "parser_strategy": "html_catalog",
+    "trust_level": 96,
+    "source_state": "arunachal_pradesh",
+    "allowed_apply_domains": [
+      "gov.in",
+      "nic.in"
+    ],
+    "enabled": false
+  },
+  {
+    "id": "state_assam",
+    "name": "Assam Government",
+    "source_url": "https://assam.gov.in/sitemap.xml",
+    "source_type": "portal",
+    "parser_strategy": "xml_sitemap",
+    "trust_level": 96,
+    "source_state": "assam",
+    "allowed_apply_domains": [
+      "gov.in",
+      "nic.in"
+    ],
+    "enabled": true
+  },
+  {
+    "id": "state_bihar",
+    "name": "Bihar Government",
+    "source_url": "https://state.bihar.gov.in",
+    "source_type": "portal",
+    "parser_strategy": "html_catalog",
+    "trust_level": 96,
+    "source_state": "bihar",
+    "allowed_apply_domains": [
+      "gov.in",
+      "nic.in"
+    ],
+    "enabled": false
+  },
+  {
+    "id": "state_chhattisgarh",
+    "name": "Chhattisgarh Government",
+    "source_url": "https://www.cgstate.gov.in",
+    "source_type": "portal",
+    "parser_strategy": "html_catalog",
+    "trust_level": 96,
+    "source_state": "chhattisgarh",
+    "allowed_apply_domains": [
+      "gov.in",
+      "nic.in"
+    ],
+    "enabled": false
+  },
+  {
+    "id": "state_goa",
+    "name": "Goa Government",
+    "source_url": "https://www.goa.gov.in/wp-sitemap.xml",
+    "source_type": "portal",
+    "parser_strategy": "xml_sitemap",
+    "trust_level": 96,
+    "source_state": "goa",
+    "allowed_apply_domains": [
+      "gov.in",
+      "nic.in"
+    ],
+    "enabled": true
+  },
+  {
+    "id": "state_gujarat",
+    "name": "Gujarat Government",
+    "source_url": "https://www.gujaratindia.gov.in",
+    "source_type": "portal",
+    "parser_strategy": "html_catalog",
+    "trust_level": 96,
+    "source_state": "gujarat",
+    "allowed_apply_domains": [
+      "gov.in",
+      "nic.in"
+    ],
+    "enabled": false
+  },
+  {
+    "id": "state_haryana",
+    "name": "Haryana Government",
+    "source_url": "https://haryana.gov.in",
+    "source_type": "portal",
+    "parser_strategy": "html_catalog",
+    "trust_level": 96,
+    "source_state": "haryana",
+    "allowed_apply_domains": [
+      "gov.in",
+      "nic.in"
+    ],
+    "enabled": false
+  },
+  {
+    "id": "state_himachal_pradesh",
+    "name": "Himachal Pradesh Government",
+    "source_url": "https://himachal.nic.in",
+    "source_type": "portal",
+    "parser_strategy": "html_catalog",
+    "trust_level": 96,
+    "source_state": "himachal_pradesh",
+    "allowed_apply_domains": [
+      "gov.in",
+      "nic.in"
+    ],
+    "enabled": false
+  },
+  {
+    "id": "state_jharkhand",
+    "name": "Jharkhand Government",
+    "source_url": "https://jharkhand.gov.in/sitemap.xml",
+    "source_type": "portal",
+    "parser_strategy": "xml_sitemap",
+    "trust_level": 96,
+    "source_state": "jharkhand",
+    "allowed_apply_domains": [
+      "gov.in",
+      "nic.in"
+    ],
+    "enabled": true
+  },
+  {
+    "id": "state_karnataka",
+    "name": "Karnataka Government",
+    "source_url": "https://karnataka.gov.in",
+    "source_type": "portal",
+    "parser_strategy": "html_catalog",
+    "trust_level": 96,
+    "source_state": "karnataka",
+    "allowed_apply_domains": [
+      "gov.in",
+      "nic.in"
+    ],
+    "enabled": false
+  },
+  {
+    "id": "state_kerala",
+    "name": "Kerala Government",
+    "source_url": "https://kerala.gov.in/sitemap.xml",
+    "source_type": "portal",
+    "parser_strategy": "xml_sitemap",
+    "trust_level": 96,
+    "source_state": "kerala",
+    "allowed_apply_domains": [
+      "gov.in",
+      "nic.in"
+    ],
+    "enabled": true
+  },
+  {
+    "id": "state_madhya_pradesh",
+    "name": "Madhya Pradesh Government",
+    "source_url": "https://mp.gov.in",
+    "source_type": "portal",
+    "parser_strategy": "html_catalog",
+    "trust_level": 96,
+    "source_state": "madhya_pradesh",
+    "allowed_apply_domains": [
+      "gov.in",
+      "nic.in"
+    ],
+    "enabled": false
+  },
+  {
+    "id": "state_maharashtra",
+    "name": "Maharashtra Government",
+    "source_url": "https://maharashtra.gov.in/sitemap.xml",
+    "source_type": "portal",
+    "parser_strategy": "xml_sitemap",
+    "trust_level": 96,
+    "source_state": "maharashtra",
+    "allowed_apply_domains": [
+      "gov.in",
+      "nic.in"
+    ],
+    "enabled": true
+  },
+  {
+    "id": "state_manipur",
+    "name": "Manipur Government",
+    "source_url": "https://manipur.gov.in",
+    "source_type": "portal",
+    "parser_strategy": "html_catalog",
+    "trust_level": 96,
+    "source_state": "manipur",
+    "allowed_apply_domains": [
+      "gov.in",
+      "nic.in"
+    ],
+    "enabled": false
+  },
+  {
+    "id": "state_meghalaya",
+    "name": "Meghalaya Government",
+    "source_url": "https://meghalaya.gov.in",
+    "source_type": "portal",
+    "parser_strategy": "html_catalog",
+    "trust_level": 96,
+    "source_state": "meghalaya",
+    "allowed_apply_domains": [
+      "gov.in",
+      "nic.in"
+    ],
+    "enabled": false
+  },
+  {
+    "id": "state_mizoram",
+    "name": "Mizoram Government",
+    "source_url": "https://mizoram.gov.in",
+    "source_type": "portal",
+    "parser_strategy": "html_catalog",
+    "trust_level": 96,
+    "source_state": "mizoram",
+    "allowed_apply_domains": [
+      "gov.in",
+      "nic.in"
+    ],
+    "enabled": false
+  },
+  {
+    "id": "state_nagaland",
+    "name": "Nagaland Government",
+    "source_url": "https://nagaland.gov.in",
+    "source_type": "portal",
+    "parser_strategy": "html_catalog",
+    "trust_level": 96,
+    "source_state": "nagaland",
+    "allowed_apply_domains": [
+      "gov.in",
+      "nic.in"
+    ],
+    "enabled": false
+  },
+  {
+    "id": "state_odisha",
+    "name": "Odisha Government",
+    "source_url": "https://odisha.gov.in",
+    "source_type": "portal",
+    "parser_strategy": "html_catalog",
+    "trust_level": 96,
+    "source_state": "odisha",
+    "allowed_apply_domains": [
+      "gov.in",
+      "nic.in"
+    ],
+    "enabled": false
+  },
+  {
+    "id": "state_punjab",
+    "name": "Punjab Government",
+    "source_url": "https://punjab.gov.in",
+    "source_type": "portal",
+    "parser_strategy": "html_catalog",
+    "trust_level": 96,
+    "source_state": "punjab",
+    "allowed_apply_domains": [
+      "gov.in",
+      "nic.in"
+    ],
+    "enabled": false
+  },
+  {
+    "id": "state_rajasthan",
+    "name": "Rajasthan Government",
+    "source_url": "https://rajasthan.gov.in/sitemap.xml",
+    "source_type": "portal",
+    "parser_strategy": "xml_sitemap",
+    "trust_level": 96,
+    "source_state": "rajasthan",
+    "allowed_apply_domains": [
+      "gov.in",
+      "nic.in"
+    ],
+    "enabled": true
+  },
+  {
+    "id": "state_sikkim",
+    "name": "Sikkim Government",
+    "source_url": "https://sikkim.gov.in",
+    "source_type": "portal",
+    "parser_strategy": "html_catalog",
+    "trust_level": 96,
+    "source_state": "sikkim",
+    "allowed_apply_domains": [
+      "gov.in",
+      "nic.in"
+    ],
+    "enabled": false
+  },
+  {
+    "id": "state_tamil_nadu",
+    "name": "Tamil Nadu Government",
+    "source_url": "https://www.tn.gov.in",
+    "source_type": "portal",
+    "parser_strategy": "html_catalog",
+    "trust_level": 96,
+    "source_state": "tamil_nadu",
+    "allowed_apply_domains": [
+      "gov.in",
+      "nic.in"
+    ],
+    "enabled": false
+  },
+  {
+    "id": "state_telangana",
+    "name": "Telangana Government",
+    "source_url": "https://www.telangana.gov.in/post-sitemap.xml",
+    "source_type": "portal",
+    "parser_strategy": "xml_sitemap",
+    "trust_level": 96,
+    "source_state": "telangana",
+    "allowed_apply_domains": [
+      "gov.in",
+      "nic.in"
+    ],
+    "enabled": true
+  },
+  {
+    "id": "state_tripura",
+    "name": "Tripura Government",
+    "source_url": "https://tripura.gov.in",
+    "source_type": "portal",
+    "parser_strategy": "html_catalog",
+    "trust_level": 96,
+    "source_state": "tripura",
+    "allowed_apply_domains": [
+      "gov.in",
+      "nic.in"
+    ],
+    "enabled": false
+  },
+  {
+    "id": "state_uttar_pradesh",
+    "name": "Uttar Pradesh Government",
+    "source_url": "https://up.gov.in/sitemap.xml",
+    "source_type": "portal",
+    "parser_strategy": "xml_sitemap",
+    "trust_level": 96,
+    "source_state": "uttar_pradesh",
+    "allowed_apply_domains": [
+      "gov.in",
+      "nic.in"
+    ],
+    "enabled": true
+  },
+  {
+    "id": "state_uttarakhand",
+    "name": "Uttarakhand Government",
+    "source_url": "https://uttarakhand.gov.in",
+    "source_type": "portal",
+    "parser_strategy": "html_catalog",
+    "trust_level": 96,
+    "source_state": "uttarakhand",
+    "allowed_apply_domains": [
+      "gov.in",
+      "nic.in"
+    ],
+    "enabled": false
+  },
+  {
+    "id": "state_west_bengal",
+    "name": "West Bengal Government",
+    "source_url": "https://wb.gov.in",
+    "source_type": "portal",
+    "parser_strategy": "html_catalog",
+    "trust_level": 96,
+    "source_state": "west_bengal",
+    "allowed_apply_domains": [
+      "gov.in",
+      "nic.in"
+    ],
+    "enabled": false
+  },
+  {
+    "id": "state_jammu_kashmir",
+    "name": "Jammu and Kashmir Government",
+    "source_url": "https://jk.gov.in",
+    "source_type": "portal",
+    "parser_strategy": "html_catalog",
+    "trust_level": 96,
+    "source_state": "jammu_kashmir",
+    "allowed_apply_domains": [
+      "gov.in",
+      "nic.in"
+    ],
+    "enabled": false
+  },
+  {
+    "id": "state_ladakh",
+    "name": "Ladakh Administration",
+    "source_url": "https://ladakh.nic.in",
+    "source_type": "portal",
+    "parser_strategy": "html_catalog",
+    "trust_level": 96,
+    "source_state": "ladakh",
+    "allowed_apply_domains": [
+      "gov.in",
+      "nic.in"
+    ],
+    "enabled": false
+  },
+  {
+    "id": "state_andaman_nicobar",
+    "name": "Andaman and Nicobar Administration",
+    "source_url": "https://www.andaman.gov.in",
+    "source_type": "portal",
+    "parser_strategy": "html_catalog",
+    "trust_level": 96,
+    "source_state": "andaman_nicobar",
+    "allowed_apply_domains": [
+      "gov.in",
+      "nic.in"
+    ],
+    "enabled": false
+  },
+  {
+    "id": "state_chandigarh",
+    "name": "Chandigarh Administration",
+    "source_url": "https://chandigarh.gov.in",
+    "source_type": "portal",
+    "parser_strategy": "html_catalog",
+    "trust_level": 96,
+    "source_state": "chandigarh",
+    "allowed_apply_domains": [
+      "gov.in",
+      "nic.in"
+    ],
+    "enabled": false
+  },
+  {
+    "id": "state_dnh_dd",
+    "name": "Dadra and Nagar Haveli and Daman and Diu Administration",
+    "source_url": "https://ddd.gov.in",
+    "source_type": "portal",
+    "parser_strategy": "html_catalog",
+    "trust_level": 96,
+    "source_state": "dadra_nagar_haveli_daman_diu",
+    "allowed_apply_domains": [
+      "gov.in",
+      "nic.in"
+    ],
+    "enabled": false
+  },
+  {
+    "id": "state_delhi",
+    "name": "Delhi Government",
+    "source_url": "https://delhi.gov.in",
+    "source_type": "portal",
+    "parser_strategy": "html_catalog",
+    "trust_level": 96,
+    "source_state": "delhi",
+    "allowed_apply_domains": [
+      "gov.in",
+      "nic.in"
+    ],
+    "enabled": false
+  },
+  {
+    "id": "state_lakshadweep",
+    "name": "Lakshadweep Administration",
+    "source_url": "https://lakshadweep.gov.in",
+    "source_type": "portal",
+    "parser_strategy": "html_catalog",
+    "trust_level": 96,
+    "source_state": "lakshadweep",
+    "allowed_apply_domains": [
+      "gov.in",
+      "nic.in"
+    ],
+    "enabled": false
+  },
+  {
+    "id": "state_puducherry",
+    "name": "Puducherry Government",
+    "source_url": "https://py.gov.in",
+    "source_type": "portal",
+    "parser_strategy": "html_catalog",
+    "trust_level": 96,
+    "source_state": "puducherry",
+    "allowed_apply_domains": [
+      "gov.in",
+      "nic.in"
+    ],
+    "enabled": false
+  }
+]

@@ -1,148 +1,70 @@
-/**
+﻿/**
  * Data ingestion script for GovGuide.
  *
  * Usage:
- *   npx ts-node --compiler-options '{"module":"commonjs"}' src/scripts/ingest.ts
- *
- * Or via the npm script:
  *   npm run ingest
  *
- * This script reads government scheme data from src/data/schemes.json,
- * generates embeddings using Gemini gemini-embedding-001 (768 dim), and upserts them
- * into the Pinecone "govguide-schemes" index.
+ * This script keeps the original manual ingestion workflow:
+ * src/data/schemes.json -> embeddings -> Pinecone upsert.
+ *
+ * Embedding and upsert logic is now shared with semi-automatic ingestion via
+ * src/ingestion/publish.ts.
  */
 
 import { config } from 'dotenv';
 config({ path: '.env.local' });
 
-import { Pinecone } from '@pinecone-database/pinecone';
 import * as fs from 'fs';
 import * as path from 'path';
+import { INGESTION_DEFAULTS } from '../ingestion/config';
+import { normalizeSeedSchemesFromFile } from '../ingestion/normalize';
+import { publishNormalizedSchemes } from '../ingestion/publish';
 
-// ── Types ──────────────────────────────────────────────────────
-interface Scheme {
-  id: string;
-  title: string;
-  summary: string;
-  eligibility: string;
-  benefit_amount: string;
-  apply_url: string;
-  department: string;
-  category: string;
-  /** Optional: additional details that get embedded but are too long for metadata */
-  details?: string;
-}
-
-// ── Config ─────────────────────────────────────────────────────
 const PINECONE_API_KEY = process.env.PINECONE_API_KEY;
-const PINECONE_INDEX_NAME = process.env.PINECONE_INDEX_NAME || 'govguide-schemes';
 const GEMINI_API_KEY = process.env.GEMINI_API_KEY;
-const BATCH_SIZE = 50; // Pinecone upsert batch size
-const EMBED_DELAY_MS = 200; // Delay between embedding calls (rate limiting)
 
 async function main() {
-  // Validate environment
   if (!PINECONE_API_KEY) {
-    console.error('❌ Missing PINECONE_API_KEY in .env.local');
+    console.error('Missing PINECONE_API_KEY in .env.local');
     process.exit(1);
   }
   if (!GEMINI_API_KEY) {
-    console.error('❌ Missing GEMINI_API_KEY in .env.local');
+    console.error('Missing GEMINI_API_KEY in .env.local');
     process.exit(1);
   }
 
-  // Load scheme data
   const dataPath = path.join(__dirname, '..', 'data', 'schemes.json');
   if (!fs.existsSync(dataPath)) {
-    console.error(`❌ Scheme data file not found at ${dataPath}`);
-    console.error('   Create src/data/schemes.json with your scheme data first.');
-    console.error('   See src/data/schemes.example.json for the expected format.');
+    console.error(`Scheme data file not found at ${dataPath}`);
+    console.error('Create src/data/schemes.json with your scheme data first.');
     process.exit(1);
   }
 
-  const schemes: Scheme[] = JSON.parse(fs.readFileSync(dataPath, 'utf-8'));
-  console.log(`📋 Loaded ${schemes.length} schemes from ${dataPath}`);
+  const normalized = normalizeSeedSchemesFromFile(dataPath, 'manual_seed');
+  console.log(`Loaded ${normalized.length} schemes from ${dataPath}`);
 
-  // Initialize clients
-  const pinecone = new Pinecone({ apiKey: PINECONE_API_KEY });
-  const index = pinecone.index(PINECONE_INDEX_NAME);
+  const result = await publishNormalizedSchemes(normalized, {
+    jobId: 'manual_ingest',
+    batchSize: INGESTION_DEFAULTS.PINECONE_BATCH_SIZE,
+    embedDelayMs: INGESTION_DEFAULTS.EMBED_DELAY_MS,
+    authenticityBySchemeId: new Map(
+      normalized.map((scheme) => [scheme.scheme_id, 100]),
+    ),
+    versionBySchemeId: new Map(
+      normalized.map((scheme) => [scheme.scheme_id, 1]),
+    ),
+  });
 
-  console.log(`🔗 Connected to Pinecone index: ${PINECONE_INDEX_NAME}`);
+  const success = result.filter((r) => r.success).length;
+  const failed = result.length - success;
+  console.log(`Manual ingest completed. success=${success}, failed=${failed}`);
 
-  // Process schemes in batches
-  const vectors: Array<{
-    id: string;
-    values: number[];
-    metadata: Record<string, string>;
-  }> = [];
-
-  for (let i = 0; i < schemes.length; i++) {
-    const scheme = schemes[i];
-
-    // Build the text to embed (combine key fields for rich embedding)
-    const embeddingText = [
-      `Scheme: ${scheme.title}`,
-      `Summary: ${scheme.summary}`,
-      `Eligibility: ${scheme.eligibility}`,
-      `Benefit: ${scheme.benefit_amount}`,
-      `Department: ${scheme.department}`,
-      `Category: ${scheme.category}`,
-      scheme.details ? `Details: ${scheme.details}` : '',
-    ]
-      .filter(Boolean)
-      .join('\n');
-
-    // Generate embedding via Gemini REST API (gemini-embedding-001, 768 dims)
-    const embResponse = await fetch(
-      `https://generativelanguage.googleapis.com/v1beta/models/gemini-embedding-001:embedContent?key=${GEMINI_API_KEY}`,
-      {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          model: 'models/gemini-embedding-001',
-          content: { parts: [{ text: embeddingText }] },
-          outputDimensionality: 768,
-        }),
-      },
-    );
-    if (!embResponse.ok) {
-      const errText = await embResponse.text();
-      throw new Error(`Embedding failed for ${scheme.id}: ${errText}`);
+  if (failed > 0) {
+    for (const row of result.filter((r) => !r.success)) {
+      console.error(`  - ${row.scheme_id}: ${row.error ?? 'unknown error'}`);
     }
-    const embData = await embResponse.json();
-    const embedding: number[] = embData.embedding.values;
-
-    vectors.push({
-      id: scheme.id,
-      values: embedding,
-      metadata: {
-        title: scheme.title,
-        summary: scheme.summary.slice(0, 500), // Pinecone metadata limit
-        eligibility: scheme.eligibility.slice(0, 500),
-        benefit_amount: scheme.benefit_amount,
-        apply_url: scheme.apply_url,
-        department: scheme.department,
-        category: scheme.category,
-      },
-    });
-
-    console.log(`  [${i + 1}/${schemes.length}] Embedded: ${scheme.title}`);
-
-    // Rate limit delay
-    if (i < schemes.length - 1) {
-      await new Promise((r) => setTimeout(r, EMBED_DELAY_MS));
-    }
+    process.exit(1);
   }
-
-  // Upsert to Pinecone in batches
-  console.log(`\n📤 Upserting ${vectors.length} vectors to Pinecone...`);
-  for (let i = 0; i < vectors.length; i += BATCH_SIZE) {
-    const batch = vectors.slice(i, i + BATCH_SIZE);
-    await index.upsert({ records: batch });
-    console.log(`  Batch ${Math.floor(i / BATCH_SIZE) + 1}: upserted ${batch.length} vectors`);
-  }
-
-  console.log(`\n✅ Done! ${vectors.length} schemes ingested into Pinecone.`);
 }
 
 main().catch((err) => {
