@@ -7,6 +7,7 @@
 | Command | Purpose |
 |---------|---------|
 | `npm run ingest` | Seed from `schemes.json` → Gemini embeddings → Pinecone upsert |
+| `npm run ingest:next` | Resume-safe chunk ingest from current Pinecone vector count (default chunk: 1000) |
 | `npm run ingest:semi` | Semi-automatic pipeline (fetch → normalize → gate → publish) |
 | `npm run ingest:weekly` | Weekly scheduler entrypoint |
 | `npm run ingest:review` | List pending review candidates |
@@ -27,10 +28,10 @@ This fetches all 4,632+ schemes from `api.myscheme.gov.in/search/v6/schemes` in 
 
 Then ingest into Pinecone:
 ```bash
-npm run ingest
+npm run ingest:next
 ```
 
-> **Note:** Gemini free-tier allows ~1,000 embeddings/day. For 4,578 schemes, you need ~5 daily runs. Swap API keys or upgrade to pay-as-you-go to do it in one shot.
+> **Note:** Gemini free-tier allows ~1,000 embeddings/day. For 4,578 schemes, you need ~5 daily runs. Use `npm run ingest:next` for daily continuation, or swap API keys / upgrade to pay-as-you-go for faster completion.
 
 ## Checking Pinecone Vector Count
 

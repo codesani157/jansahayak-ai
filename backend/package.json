@@ -8,6 +8,7 @@
     "start": "next start",
     "lint": "eslint",
     "ingest": "npx tsx src/scripts/ingest.ts",
+    "ingest:next": "npx tsx src/scripts/ingest-next.ts",
     "ingest:semi": "npx tsx src/scripts/ingest-semi.ts",
     "ingest:weekly": "npx tsx src/scripts/ingest-weekly.ts",
     "ingest:review": "npx tsx src/scripts/ingest-review.ts",
