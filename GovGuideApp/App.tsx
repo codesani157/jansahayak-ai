@@ -17,7 +17,7 @@ const SplashGate: React.FC<{ children: React.ReactNode }> = ({ children }) => {
     return (
       <View style={styles.splash}>
         <Text style={styles.splashEmoji}>🇮🇳</Text>
-        <Text style={styles.splashTitle}>GovGuide</Text>
+        <Text style={styles.splashTitle}>JanSahayak AI</Text>
         <ActivityIndicator size="large" color={theme.colors.primary} style={styles.splashSpinner} />
       </View>
     );

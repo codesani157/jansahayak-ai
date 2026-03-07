@@ -6,7 +6,9 @@ const BASE_URL = __DEV__
       android: 'http://10.0.2.2:3000', // Android emulator → host (Next.js dev)
       default: 'http://localhost:3000', // web / iOS simulator (Next.js dev)
     })!
-  : 'https://api.govguide.in'; // production
+  : Platform.OS === 'web'
+    ? ''                              // same-origin on Vercel (web)
+    : 'https://scheme-setu.vercel.app'; // production mobile
 
 const API_VERSION = '/api/v1';
 const REQUEST_TIMEOUT_MS = 30_000;

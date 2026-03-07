@@ -28,6 +28,9 @@
     },
     "plugins": [
       "expo-secure-store"
-    ]
+    ],
+    "experiments": {
+      "baseUrl": "/app"
+    }
   }
 }

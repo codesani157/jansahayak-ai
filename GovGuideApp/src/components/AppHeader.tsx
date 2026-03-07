@@ -12,7 +12,7 @@ interface AppHeaderProps {
 
 export const AppHeader: React.FC<AppHeaderProps> = ({
     mode = 'full',
-    title = 'GovGuide Assistant',
+    title = 'JanSahayak AI',
     onLanguagePress,
     onPersonaPress,
     personaIcon = '🚜'
@@ -31,8 +31,8 @@ export const AppHeader: React.FC<AppHeaderProps> = ({
 
                     <View style={styles.titleContainer}>
                         <View style={styles.titleRow}>
-                            <Text style={styles.titleGov}>Gov</Text>
-                            <Text style={styles.titleGuide}>Guide</Text>
+                            <Text style={styles.titleGov}>JanSahayak</Text>
+                            <Text style={styles.titleGuide}> AI</Text>
                         </View>
                         {mode === 'full' && (
                             <View style={styles.statusContainer}>
