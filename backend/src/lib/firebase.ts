@@ -1,6 +1,39 @@
 import admin from 'firebase-admin';
 
 /**
+ * Parse a PEM private key from an environment variable, handling all common
+ * encoding quirks (Vercel UI, dotenv, JSON-escaped, double-escaped, etc.).
+ * Extracts the raw base64 and rebuilds a canonical PEM so OpenSSL never chokes.
+ */
+function parsePrivateKey(raw: string | undefined): string | undefined {
+  if (!raw) return undefined;
+
+  let key = raw.trim();
+
+  // 1. Strip surrounding quotes (single or double)
+  if ((key.startsWith('"') && key.endsWith('"')) ||
+      (key.startsWith("'") && key.endsWith("'"))) {
+    key = key.slice(1, -1);
+  }
+
+  // 2. Replace literal two-char \n sequences with real newlines
+  key = key.replace(/\\n/g, '\n');
+
+  // 3. Extract base64 payload between PEM header/footer
+  const match = key.match(
+    /-----BEGIN [A-Z ]+-----\s*([\s\S]*?)\s*-----END [A-Z ]+-----/,
+  );
+  if (!match) return undefined;
+
+  // 4. Strip every non-base64 character from the payload (spaces, CR, LF, etc.)
+  const base64 = match[1].replace(/[^A-Za-z0-9+/=]/g, '');
+
+  // 5. Rebuild canonical PEM with 64-char lines
+  const lines = base64.match(/.{1,64}/g) || [];
+  return `-----BEGIN PRIVATE KEY-----\n${lines.join('\n')}\n-----END PRIVATE KEY-----\n`;
+}
+
+/**
  * Singleton Firebase Admin initializer.
  * Reads credentials from environment variables.
  */
@@ -11,14 +44,9 @@ function getFirebaseAdmin() {
 
   const projectId = process.env.FIREBASE_PROJECT_ID;
   const clientEmail = process.env.FIREBASE_CLIENT_EMAIL;
-  // Private key comes with escaped newlines from env — handle both quoted and unquoted formats
-  let privateKey = process.env.FIREBASE_PRIVATE_KEY;
-  if (privateKey) {
-    // Strip surrounding quotes if present (Vercel sometimes preserves them)
-    privateKey = privateKey.replace(/^["']|["']$/g, '');
-    // Replace literal \n with actual newlines
-    privateKey = privateKey.replace(/\\n/g, '\n');
-  }
+  // Private key comes in various formats across environments (dotenv, Vercel UI, CLI).
+  // We extract the raw base64 and rebuild a clean PEM to avoid any encoding issues.
+  const privateKey = parsePrivateKey(process.env.FIREBASE_PRIVATE_KEY);
 
   if (!projectId || !clientEmail || !privateKey) {
     console.warn(
