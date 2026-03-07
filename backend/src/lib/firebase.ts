@@ -11,8 +11,14 @@ function getFirebaseAdmin() {
 
   const projectId = process.env.FIREBASE_PROJECT_ID;
   const clientEmail = process.env.FIREBASE_CLIENT_EMAIL;
-  // Private key comes with escaped newlines from env
-  const privateKey = process.env.FIREBASE_PRIVATE_KEY?.replace(/\\n/g, '\n');
+  // Private key comes with escaped newlines from env — handle both quoted and unquoted formats
+  let privateKey = process.env.FIREBASE_PRIVATE_KEY;
+  if (privateKey) {
+    // Strip surrounding quotes if present (Vercel sometimes preserves them)
+    privateKey = privateKey.replace(/^["']|["']$/g, '');
+    // Replace literal \n with actual newlines
+    privateKey = privateKey.replace(/\\n/g, '\n');
+  }
 
   if (!projectId || !clientEmail || !privateKey) {
     console.warn(

@@ -58,6 +58,7 @@ export async function POST(request: NextRequest) {
     return jsonResponse({ user_id: mockUserId, token });
   } catch (error) {
     console.error('[auth/session] Error:', error);
-    return errorResponse('Failed to create session', 500);
+    const message = error instanceof Error ? error.message : 'Failed to create session';
+    return errorResponse(message, 500);
   }
 }
