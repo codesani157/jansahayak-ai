@@ -6,8 +6,7 @@ JanSahayak AI is a mobile-first, AI-powered assistant that helps Indian citizens
 
 ## Live Demo
 
-🔗 **[https://jansahayak.vercel.app](https://jansahayak.vercel.app)** — Landing page  
-💬 **[https://jansahayak.vercel.app/app/](https://jansahayak.vercel.app/app/)** — Chat assistant
+💬 **[https://jansahayak-ai.vercel.app/app/](https://jansahayak.vercel.app/app/)**
 
 ## How It Works
 
