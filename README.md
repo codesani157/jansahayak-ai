@@ -6,8 +6,8 @@ JanSahayak AI is a mobile-first, AI-powered assistant that helps Indian citizens
 
 ## Live Demo
 
-🔗 **[https://scheme-setu.vercel.app](https://scheme-setu.vercel.app)** — Landing page  
-💬 **[https://scheme-setu.vercel.app/app/](https://scheme-setu.vercel.app/app/)** — Chat assistant
+🔗 **[https://jansahayak.vercel.app](https://jansahayak.vercel.app)** — Landing page  
+💬 **[https://jansahayak.vercel.app/app/](https://jansahayak.vercel.app/app/)** — Chat assistant
 
 ## How It Works
 
@@ -93,19 +93,6 @@ npm install
 npm run web                   # http://localhost:8081
 ```
 
-### Environment Variables
-| Variable | Description |
-|----------|------------|
-| `FIREBASE_PROJECT_ID` | Firebase project ID |
-| `FIREBASE_CLIENT_EMAIL` | Firebase service account email |
-| `FIREBASE_PRIVATE_KEY` | Firebase private key |
-| `PINECONE_API_KEY` | Pinecone API key |
-| `PINECONE_INDEX_NAME` | Pinecone index (default: `govguide-schemes`) |
-| `GEMINI_API_KEY` | Google Gemini API key |
-| `TELEGRAM_BOT_TOKEN` | Telegram bot token (for blob storage) |
-| `TELEGRAM_CHANNEL_ID` | Telegram channel for document storage |
-| `JWT_SECRET` | 64-char hex string for JWT signing |
-
 ## Deployment to Vercel
 
 The backend directory is the Vercel deployment root. It serves both the API and the Expo web frontend.
@@ -117,13 +104,16 @@ The backend directory is the Vercel deployment root. It serves both the API and 
 
 ## Key Features
 
-- 🗣️ **Multilingual** — English, Hindi, Tamil
-- 🎭 **Persona-aware** — Tailored responses for farmers, students, women, senior citizens, etc.
-- 🔍 **RAG Pipeline** — Retrieval-Augmented Generation for grounded, accurate answers
-- 📋 **Scheme Cards** — Structured cards with eligibility, benefits, and official apply links
-- 👍 **Feedback Loop** — Thumbs up/down on every response for quality tracking
-- ⏰ **Reminders** — Opt-in reminders for deadline-sensitive schemes
+-  **Multilingual** — English, Hindi, Tamil
+-  **Persona-aware** — Tailored responses for farmers, students, women, senior citizens, etc.
+-  **RAG Pipeline** — Retrieval-Augmented Generation for grounded, accurate answers
+-  **Scheme Cards** — Structured cards with eligibility, benefits, and official apply links
+-  **Feedback Loop** — Thumbs up/down on every response for quality tracking
+-  **Reminders** — Opt-in reminders for deadline-sensitive schemes
 
 ## Team
-
+- Rajdeep Ray
+- Susmit Thakur
+- Soumyadeep Datta
+- Samiran Jana
 Built for the AI for Bharat Hackathon.
