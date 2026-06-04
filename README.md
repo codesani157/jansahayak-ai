@@ -115,4 +115,3 @@ The backend directory is the Vercel deployment root. It serves both the API and 
 - Susmit Thakur
 - Soumyadeep Datta
 - Samiran Jana
-Built for the AI for Bharat Hackathon.
